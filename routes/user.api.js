@@ -1,9 +1,11 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 const userAPi = require("./user.api");
 const userController = require("../controllers/user.controller");
+const authController = require("../controllers/auth.controller");
 
 // 회원가입
-router.post("/",userController.createUser)
+router.post("/", userController.createUser);
+router.get("/me", authController.authenticate, userController.getUser); // token이 valid한 토큰인지, 이 token을 가지고 유저를 찾아서 리턴
 
 module.exports = router;
